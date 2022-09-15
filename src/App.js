@@ -39,7 +39,6 @@ function App() {
           throw new Error("Could not receive data from database");
         const data = await response.json();
         setTheme(data.dark);
-        console.log(data.dark);
       } catch (err) {
         setFetchError(err.message);
         console.log(err);
@@ -198,11 +197,12 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col font-body justify-center items-center max-h-screen w-screen h-screen overflow-auto bg-lm-VLG bg-lm-Mob-BgImg md:bg-lm-BgImg bg-no-repeat bg-40% dark:bg-dm-Mob-BgImg dark:bg-black md:dark:bg-dm-BgImg">
-      <div className="relative max-w-[800px] w-11/12 xs:w-5/6 md:w-2/3 lg:w-2/3 h-5/6 md:2/3 lg:h-4/5 antialiased">
+    <div className="flex flex-col font-body py-3 xs:py-6 lg:py-9 xl:py-12 justify-start items-center max-h-screen w-screen h-screen overflow-auto bg-lm-VLG bg-lm-Mob-BgImg md:bg-lm-BgImg bg-no-repeat bg-40% dark:bg-dm-Mob-BgImg dark:bg-black md:dark:bg-dm-BgImg">
+      <div className="relative max-w-[800px] w-11/12 xs:w-5/6 md:w-2/3 h-5/6 lg:h-4/5 antialiased">
         <Header theme={theme} handleUpdateTheme={handleUpdateTheme} />
         <MainApp
           filteredResults={filteredResults}
+          setFilteredResults={setFilteredResults}
           setFilter={setFilter}
           filter={filter}
           newTodo={newTodo}
@@ -212,6 +212,7 @@ function App() {
           handleDelete={handleDelete}
           handleClearCompleted={handleClearCompleted}
           todos={todos}
+          setTodos={setTodos}
           isLoading={isLoading}
         />
         <FetchError fetchError={fetchError} />

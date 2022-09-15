@@ -1,7 +1,7 @@
 import React from "react";
 import InputTodo from "./InputTodo";
 import TodosList from "./TodosList";
-import Footer from "./Footer";
+import DragAndDropInfo from "./DragAndDropInfo";
 import TodosListBottom from "./TodosListBottom";
 import FilterOptionsMob from "./FilterOptionsMob";
 
@@ -9,6 +9,7 @@ const MainApp = ({
   setFilter,
   filter,
   filteredResults,
+  setFilteredResults,
   newTodo,
   setNewTodo,
   handleCheck,
@@ -16,6 +17,7 @@ const MainApp = ({
   handleDelete,
   handleClearCompleted,
   todos,
+  setTodos,
   isLoading,
 }) => {
   return (
@@ -28,10 +30,13 @@ const MainApp = ({
         />
         <TodosList
           filteredResults={filteredResults}
+          setFilteredResults={setFilteredResults}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
           filter={filter}
           isLoading={isLoading}
+          todos={todos}
+          setTodos={setTodos}
         />
         <TodosListBottom
           setFilter={setFilter}
@@ -41,7 +46,7 @@ const MainApp = ({
         />
         <FilterOptionsMob filter={filter} setFilter={setFilter} />
       </main>
-      <Footer />
+      <DragAndDropInfo />
     </div>
   );
 };

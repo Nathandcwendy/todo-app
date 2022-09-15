@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-lm-VLG dark:bg-black;
+    @apply bg-lm-VLG;
   }
 }
 

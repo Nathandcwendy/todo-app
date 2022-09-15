@@ -2,8 +2,8 @@
   "todos": [
     {
       "id": 1,
-      "todo": "Completed online JavaScript course",
-      "checked": false
+      "todo": "Complete online JavaScript course",
+      "checked": true
     },
     {
       "id": 2,
