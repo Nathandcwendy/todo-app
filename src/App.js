@@ -144,7 +144,11 @@ function App() {
           setTodos={setTodos}
           isLoading={isLoading}
         />
-        <FetchError fetchError={fetchError} />
+        <FetchError
+          fetchError={fetchError}
+          setFetchError={setFetchError}
+          setIsLoading={setIsLoading}
+        />
       </div>
     </div>
   );
