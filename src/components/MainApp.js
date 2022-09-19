@@ -22,7 +22,6 @@ const MainApp = ({
   return (
     <div className="relative pb-6">
       <main className="flex flex-col shadow-3xl rounded-lg overflow-auto mb-10 bg-transparent">
-        {/* <main className="flex flex-col shadow-3xl rounded-lg overflow-hidden mb-10 bg-transparent"> */}
         <InputTodo
           newTodo={newTodo}
           setNewTodo={setNewTodo}

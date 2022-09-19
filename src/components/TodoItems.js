@@ -12,7 +12,7 @@ const TodoItems = ({
 }) => {
   return (
     <>
-      {filteredResults.map((item, index) => (
+      {filteredResults.map((item) => (
         <MovableTodoItem
           key={item.id}
           item={item}

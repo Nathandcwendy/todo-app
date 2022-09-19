@@ -79,26 +79,9 @@ function App() {
   };
 
   const handleClearCompleted = () => {
-    // const todosDelete = todos.filter((todoItem) => todoItem.checked === true);
     const newTodos = todos.filter((todoItem) => todoItem.checked !== true);
     setTodos(newTodos);
     updateLocalStorage(newTodos);
-
-    // todosDelete.forEach(async (todoItem) => {
-    //   const optionsObj = {
-    //     method: "DELETE",
-    //   };
-
-    //   const reqUrl = `${API_URL}/${todoItem.id}`;
-
-    //   try {
-    //     const response = await fetch(reqUrl, optionsObj);
-    //     if (response.ok) setFetchError(null);
-    //     if (!response.ok) throw new Error("Could not Update Database");
-    //   } catch (err) {
-    //     setFetchError(err.message);
-    //   }
-    // });
   };
 
   const handleAdd = async () => {
@@ -117,23 +100,6 @@ function App() {
       setTodos(newTodos);
       setNewTodo("");
       updateLocalStorage(newTodos);
-      // const optionsObj = {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(newTodoItem),
-      // };
-
-      // const reqUrl = `${API_URL}`;
-
-      // try {
-      //   const response = await fetch(reqUrl, optionsObj);
-      //   if (response.ok) setFetchError(null);
-      //   if (!response.ok) throw new Error("Could not Update Database");
-      // } catch (err) {
-      //   setFetchError(err.message);
-      // }
     } else return;
   };
 
@@ -145,65 +111,18 @@ function App() {
     );
     setTodos(newTodos);
     updateLocalStorage(newTodos);
-    // const todoUpdate = newTodos.filter((todoItem) => todoItem.id === id);
-    // const optionsObj = {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ checked: todoUpdate[0].checked }),
-    // };
-
-    // const reqUrl = `${API_URL}/${id}`;
-
-    // try {
-    //   const response = await fetch(reqUrl, optionsObj);
-    //   if (response.ok) setFetchError(null);
-    //   if (!response.ok) throw new Error("Could not Update Database");
-    // } catch (err) {
-    //   setFetchError(err.message);
-    // }
   };
 
   const handleDelete = async (id) => {
     const newTodos = todos.filter((todoItem) => todoItem.id !== id);
     setTodos(newTodos);
     updateLocalStorage(newTodos);
-    // const optionsObj = {
-    //   method: "DELETE",
-    // };
-
-    // const reqUrl = `${API_URL}/${id}`;
-
-    // try {
-    //   const response = await fetch(reqUrl, optionsObj);
-    //   if (response.ok) setFetchError(null);
-    //   if (!response.ok) throw new Error("Could not Update Database");
-    // } catch (err) {
-    //   setFetchError(`${err.message}`);
-    // }
   };
 
   const handleUpdateTheme = async () => {
     const newTheme = !theme;
     setTheme(newTheme);
     localStorage.setItem("theme", JSON.stringify(newTheme));
-    // const reqUrl = THEME_URL;
-    // const optionsObj = {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ dark: newTheme }),
-    // };
-
-    // try {
-    //   const response = await fetch(reqUrl, optionsObj);
-    //   if (response.ok) setFetchError(null);
-    //   if (!response.ok) throw new Error("Could not Update Database");
-    // } catch (err) {
-    //   setFetchError(err.message);
-    // }
   };
 
   return (

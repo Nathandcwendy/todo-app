@@ -14,13 +14,9 @@ const TodosList = ({
   let dragSource = {};
   let dropTarget = {};
   let dropTargetElement;
-  // let dragSourceElement;
 
   const dragStart = (e, id) => {
-    // console.log("dragStart", id);
     dragSource = todos.find((todoItem) => todoItem.id === id);
-    // e.currentTarget.classList.add("lg:dragItem");
-    // dragSourceElement = e.currentTarget;
   };
 
   const dragEnter = (e, id) => {
@@ -46,16 +42,13 @@ const TodosList = ({
     );
     if (destinationIndex === sourceIndex) {
       dropTargetElement.classList.remove("overTarget");
-      // dragSourceElement.classList.remove("lg:dragItem");
       return;
     }
     dropTargetElement.classList.remove("overTarget");
-    // dragSourceElement.classList.remove("lg:dragItem");
     const copiedTodos = [...todos];
     const removedTodo = copiedTodos.splice(sourceIndex, 1);
     copiedTodos.splice(destinationIndex, 0, removedTodo[0]);
     setTodos(copiedTodos);
-    console.log(todos.length);
   };
 
   return (
@@ -63,7 +56,6 @@ const TodosList = ({
       onDrop={handleDrop}
       className="relative max-h-h-5 overflow-y-auto overflow-x-hidden
       rounded-t-lg dark:bg-dm-VDDesatBlue scrollbar"
-      // className="max-h-h-4 overflow-auto rounded-t-lg dark:bg-dm-VDDesatBlue"
     >
       {isLoading ? (
         <Loading />
@@ -99,42 +91,3 @@ const TodosList = ({
 };
 
 export default TodosList;
-
-// const ref = useRef(null);
-
-// useEffect(() => {
-//   const element = ref.current;
-//   let scroll;
-//   const handleScrollBar = (e) => {
-//     element.addEventListener(
-//       "scroll",
-//       function (e) {
-//         window.clearTimeout(scroll);
-//         e.target.classList.remove("no-scrollbar");
-//         e.target.classList.add("scrollbar");
-//         scroll = setTimeout(function () {
-//           e.target.classList.add("no-scrollbar");
-//           e.target.classList.remove("scrollbar");
-//         }, 500);
-//       },
-//       false
-//     );
-//   };
-//   handleScrollBar();
-
-//   return () => {
-//     element.removeEventListener(
-//       "scroll",
-//       function (e) {
-//         window.clearTimeout(scroll);
-//         e.target.classList.remove("no-scrollbar");
-//         e.target.classList.add("scrollbar");
-//         scroll = setTimeout(function () {
-//           e.target.classList.add("no-scrollbar");
-//           e.target.classList.remove("scrollbar");
-//         }, 500);
-//       },
-//       false
-//     );
-//   };
-// }, []);
