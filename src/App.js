@@ -2,55 +2,50 @@ import Header from "./components/Header";
 import MainApp from "./components/MainApp";
 import { useEffect, useState } from "react";
 import FetchError from "./components/FetchError";
-function App() {
-  const API_URL = "http://localhost:3500/todos";
-  const THEME_URL = "http://localhost:3500/theme/1";
 
-  const [theme, setTheme] = useState(false);
-  const [todos, setTodos] = useState([]);
+function App() {
+  const [theme, setTheme] = useState(
+    JSON.parse(localStorage.getItem("theme")) || false
+  );
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todoList")) || [
+      {
+        id: 1,
+        todo: "Complete online JavaScript course",
+        checked: true,
+      },
+      {
+        id: 2,
+        todo: "Jog around the park 3x",
+        checked: false,
+      },
+      {
+        id: 3,
+        todo: "10 minutes meditation",
+        checked: false,
+      },
+      {
+        id: 4,
+        todo: "Read for 1 hour",
+        checked: false,
+      },
+      {
+        id: 5,
+        todo: "Pick up groceries",
+        checked: false,
+      },
+      {
+        id: 6,
+        todo: "Complete Todo App on Frontend Mentor",
+        checked: false,
+      },
+    ]
+  );
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("all");
   const [filteredResults, setFilteredResults] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchTodos = async () => {
-      try {
-        const response = await fetch(API_URL);
-        if (response.ok) setFetchError(null);
-        if (!response.ok)
-          throw new Error("Could not receive data from database");
-        const data = await response.json();
-        setTodos(data);
-      } catch (err) {
-        setFetchError(err.message);
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    const fetchTheme = async () => {
-      try {
-        const response = await fetch(THEME_URL);
-        if (response.ok) setFetchError(null);
-        if (!response.ok)
-          throw new Error("Could not receive data from database");
-        const data = await response.json();
-        setTheme(data.dark);
-      } catch (err) {
-        setFetchError(err.message);
-        console.log(err);
-      }
-    };
-    setTimeout(() => {
-      fetchTheme();
-    }, 500);
-    setTimeout(() => {
-      fetchTodos();
-    }, 1000);
-  }, []);
 
   useEffect(() => {
     if (filter === "all") {
@@ -79,55 +74,67 @@ function App() {
       : element.classList.remove("dark");
   }, [theme]);
 
+  const updateLocalStorage = (items) => {
+    localStorage.setItem("todoList", JSON.stringify(items));
+  };
+
   const handleClearCompleted = () => {
-    const todosDelete = todos.filter((todoItem) => todoItem.checked === true);
+    // const todosDelete = todos.filter((todoItem) => todoItem.checked === true);
     const newTodos = todos.filter((todoItem) => todoItem.checked !== true);
     setTodos(newTodos);
+    updateLocalStorage(newTodos);
 
-    todosDelete.forEach(async (todoItem) => {
-      const optionsObj = {
-        method: "DELETE",
-      };
+    // todosDelete.forEach(async (todoItem) => {
+    //   const optionsObj = {
+    //     method: "DELETE",
+    //   };
 
-      const reqUrl = `${API_URL}/${todoItem.id}`;
+    //   const reqUrl = `${API_URL}/${todoItem.id}`;
 
-      try {
-        const response = await fetch(reqUrl, optionsObj);
-        if (response.ok) setFetchError(null);
-        if (!response.ok) throw new Error("Could not Update Database");
-      } catch (err) {
-        setFetchError(err.message);
-      }
-    });
+    //   try {
+    //     const response = await fetch(reqUrl, optionsObj);
+    //     if (response.ok) setFetchError(null);
+    //     if (!response.ok) throw new Error("Could not Update Database");
+    //   } catch (err) {
+    //     setFetchError(err.message);
+    //   }
+    // });
   };
 
   const handleAdd = async () => {
-    const newId = todos.length ? todos[todos.length - 1].id + 1 : 1;
-    const newTodoItem = {
-      id: newId,
-      todo: newTodo,
-      checked: false,
-    };
-    const newTodos = [...todos, newTodoItem];
-    setTodos(newTodos);
-    setNewTodo("");
-    const optionsObj = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTodoItem),
-    };
+    if (newTodo.toLowerCase().trim() !== "") {
+      const sortedTodos = todos;
+      sortedTodos.sort((a, b) => a.id - b.id);
+      const newId = todos.length
+        ? sortedTodos[sortedTodos.length - 1].id + 1
+        : 1;
+      const newTodoItem = {
+        id: newId,
+        todo: newTodo,
+        checked: false,
+      };
+      const newTodos = [...todos, newTodoItem];
+      setTodos(newTodos);
+      setNewTodo("");
+      updateLocalStorage(newTodos);
+      // const optionsObj = {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(newTodoItem),
+      // };
 
-    const reqUrl = `${API_URL}`;
+      // const reqUrl = `${API_URL}`;
 
-    try {
-      const response = await fetch(reqUrl, optionsObj);
-      if (response.ok) setFetchError(null);
-      if (!response.ok) throw new Error("Could not Update Database");
-    } catch (err) {
-      setFetchError(err.message);
-    }
+      // try {
+      //   const response = await fetch(reqUrl, optionsObj);
+      //   if (response.ok) setFetchError(null);
+      //   if (!response.ok) throw new Error("Could not Update Database");
+      // } catch (err) {
+      //   setFetchError(err.message);
+      // }
+    } else return;
   };
 
   const handleCheck = async (id) => {
@@ -137,68 +144,71 @@ function App() {
         : todoItem
     );
     setTodos(newTodos);
-    const todoUpdate = newTodos.filter((todoItem) => todoItem.id === id);
-    const optionsObj = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ checked: todoUpdate[0].checked }),
-    };
+    updateLocalStorage(newTodos);
+    // const todoUpdate = newTodos.filter((todoItem) => todoItem.id === id);
+    // const optionsObj = {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ checked: todoUpdate[0].checked }),
+    // };
 
-    const reqUrl = `${API_URL}/${id}`;
+    // const reqUrl = `${API_URL}/${id}`;
 
-    try {
-      const response = await fetch(reqUrl, optionsObj);
-      if (response.ok) setFetchError(null);
-      if (!response.ok) throw new Error("Could not Update Database");
-    } catch (err) {
-      setFetchError(err.message);
-    }
+    // try {
+    //   const response = await fetch(reqUrl, optionsObj);
+    //   if (response.ok) setFetchError(null);
+    //   if (!response.ok) throw new Error("Could not Update Database");
+    // } catch (err) {
+    //   setFetchError(err.message);
+    // }
   };
 
   const handleDelete = async (id) => {
     const newTodos = todos.filter((todoItem) => todoItem.id !== id);
     setTodos(newTodos);
-    const optionsObj = {
-      method: "DELETE",
-    };
+    updateLocalStorage(newTodos);
+    // const optionsObj = {
+    //   method: "DELETE",
+    // };
 
-    const reqUrl = `${API_URL}/${id}`;
+    // const reqUrl = `${API_URL}/${id}`;
 
-    try {
-      const response = await fetch(reqUrl, optionsObj);
-      if (response.ok) setFetchError(null);
-      if (!response.ok) throw new Error("Could not Update Database");
-    } catch (err) {
-      setFetchError(`${err.message}`);
-    }
+    // try {
+    //   const response = await fetch(reqUrl, optionsObj);
+    //   if (response.ok) setFetchError(null);
+    //   if (!response.ok) throw new Error("Could not Update Database");
+    // } catch (err) {
+    //   setFetchError(`${err.message}`);
+    // }
   };
 
   const handleUpdateTheme = async () => {
     const newTheme = !theme;
     setTheme(newTheme);
-    const reqUrl = THEME_URL;
-    const optionsObj = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ dark: newTheme }),
-    };
+    localStorage.setItem("theme", JSON.stringify(newTheme));
+    // const reqUrl = THEME_URL;
+    // const optionsObj = {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ dark: newTheme }),
+    // };
 
-    try {
-      const response = await fetch(reqUrl, optionsObj);
-      if (response.ok) setFetchError(null);
-      if (!response.ok) throw new Error("Could not Update Database");
-    } catch (err) {
-      setFetchError(err.message);
-    }
+    // try {
+    //   const response = await fetch(reqUrl, optionsObj);
+    //   if (response.ok) setFetchError(null);
+    //   if (!response.ok) throw new Error("Could not Update Database");
+    // } catch (err) {
+    //   setFetchError(err.message);
+    // }
   };
 
   return (
-    <div className="flex flex-col font-body py-3 xs:py-6 lg:py-9 xl:py-12 justify-start items-center max-h-screen w-screen h-screen overflow-auto bg-lm-VLG bg-lm-Mob-BgImg md:bg-lm-BgImg bg-no-repeat bg-40% dark:bg-dm-Mob-BgImg dark:bg-black md:dark:bg-dm-BgImg">
-      <div className="relative max-w-[800px] w-11/12 xs:w-5/6 md:w-2/3 h-5/6 lg:h-4/5 antialiased">
+    <div className="flex flex-col font-body py-3 xs:py-6 lg:py-9 justify-start tall:justify-center items-center w-screen min-h-screen h-auto overflow-auto bg-lm-VLG bg-lm-Mob-BgImg md:bg-lm-BgImg bg-no-repeat bg-40% dark:bg-dm-Mob-BgImg dark:bg-black md:dark:bg-dm-BgImg overflow-x-hidden">
+      <div className="relative w-11/12 xs:w-5/6 md:w-2/3 xl:w-1/2 antialiased select-none h-auto">
         <Header theme={theme} handleUpdateTheme={handleUpdateTheme} />
         <MainApp
           filteredResults={filteredResults}
@@ -222,23 +232,3 @@ function App() {
 }
 
 export default App;
-
-// {/* <body>
-
-// Todo
-
-// <!-- Add dynamic number --> items left
-
-// All
-// Active
-// Completed
-
-// Clear Completed
-
-// Drag and drop to reorder list
-
-// <div class="attribution">
-//   Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-//   Coded by <a href="#">Your Name Here</a>.
-// </div>
-// </body> */}

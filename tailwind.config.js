@@ -5,7 +5,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     screens: {
-      xs: "475px",
+      xs: "485px",
       ...defaultTheme.screens,
     },
     extend: {
@@ -57,6 +57,10 @@ module.exports = {
         "h-3": "40vh",
         "h-4": "45vh",
         "h-5": "50vh",
+      },
+      screens: {
+        tall: { raw: "(min-height: 600px)", max: "768px" },
+        // => @media (min-height: 800px) { ... }
       },
     },
   },

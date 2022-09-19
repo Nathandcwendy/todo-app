@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = ({ theme, handleUpdateTheme }) => {
   return (
-    <header className="flex py-5 justify-between items-center mb-6">
+    <header className="flex py-6 justify-between items-center mb-6">
       <h1 className="text-white text-3xl tracking-letter-sp-1 md:text-4xl md:tracking-letter-sp-2 lg:text-6xl lg:tracking-letter-sp-4 font-bold">
         TODO
       </h1>

@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-lm-VLG;
+    @apply bg-lm-VLG dark:bg-black;
   }
 }
 
@@ -40,5 +40,13 @@
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: #c0a0b9;
+  }
+
+  .overTarget {
+    @apply opacity-40 dark:opacity-75 bg-slate-300 dark:bg-slate-600 scale-110 !important;
+  }
+
+  .dragItem {
+    @apply opacity-10;
   }
 }

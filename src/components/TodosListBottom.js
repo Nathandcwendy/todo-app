@@ -12,7 +12,7 @@ const TodosListBottom = ({
   ).length;
 
   return (
-    <div className="flex justify-between items-center px-4 py-4 text-xs md:text-base lg:text-xl rounded-b-lg text-slate-500 bg-white dark:bg-dm-VDDesatBlue">
+    <div className="flex justify-between items-center px-4 py-4 text-base md:text-lg lg:text-xl rounded-b-lg text-slate-500 bg-white dark:bg-dm-VDDesatBlue">
       <p>{activeCount} items left</p>
       <FilterOptions filter={filter} setFilter={setFilter} />
       {/* <div className="hidden space-x-2 xs:flex">

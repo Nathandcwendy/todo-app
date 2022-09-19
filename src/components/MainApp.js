@@ -9,7 +9,6 @@ const MainApp = ({
   setFilter,
   filter,
   filteredResults,
-  setFilteredResults,
   newTodo,
   setNewTodo,
   handleCheck,
@@ -21,8 +20,9 @@ const MainApp = ({
   isLoading,
 }) => {
   return (
-    <div className="relative pb-10">
-      <main className="flex flex-col shadow-3xl rounded-lg overflow-hidden mb-10 bg-transparent">
+    <div className="relative pb-6">
+      <main className="flex flex-col shadow-3xl rounded-lg overflow-auto mb-10 bg-transparent">
+        {/* <main className="flex flex-col shadow-3xl rounded-lg overflow-hidden mb-10 bg-transparent"> */}
         <InputTodo
           newTodo={newTodo}
           setNewTodo={setNewTodo}
@@ -30,7 +30,6 @@ const MainApp = ({
         />
         <TodosList
           filteredResults={filteredResults}
-          setFilteredResults={setFilteredResults}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
           filter={filter}
