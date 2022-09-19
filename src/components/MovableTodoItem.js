@@ -30,7 +30,7 @@ const MovableTodoItem = ({
     >
       <div className="w-auto relative grid place-content-center">
         <input
-          id="new-todo"
+          id={`todo-${item.id}`}
           type="checkbox"
           onClick={() => handleCheck(item.id)}
           className={
@@ -39,6 +39,12 @@ const MovableTodoItem = ({
               : `${checkBoxStyles}`
           }
         />
+        <label
+          htmlFor={`todo-${item.id}`}
+          className="absolute top-0 -left-[9999999px]"
+        >
+          Checkbox
+        </label>
         {item.checked ? (
           <HiCheck
             onClick={() => handleCheck(item.id)}
