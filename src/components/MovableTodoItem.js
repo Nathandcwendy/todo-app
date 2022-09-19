@@ -18,6 +18,7 @@ const MovableTodoItem = ({
 
   return (
     <li
+      id={`list-${item.id}`}
       className="relative flex flex-row justify-start items-center space-x-1 xs:space-x-3 md:space-x-4 lg:space-x-6 w-full px-2 py-2 lg:px-4 lg:py-4 bg-white dark:bg-dm-VDDesatBlue border-b-2 dark:border-slate-700 transition duration-[75ms] first:rounded-t-lg"
       draggable
       onDragStart={(e) => dragStart(e, item.id)}
@@ -30,6 +31,7 @@ const MovableTodoItem = ({
     >
       <div className="w-auto relative grid place-content-center">
         <input
+          aria-labelledby={`list-${item.id}`}
           id={`todo-${item.id}`}
           type="checkbox"
           onClick={() => handleCheck(item.id)}

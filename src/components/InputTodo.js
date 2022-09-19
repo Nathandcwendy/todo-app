@@ -33,7 +33,7 @@ const InputTodo = ({ newTodo, setNewTodo, handleAdd }) => {
         />
         <label
           htmlFor="input-todo-text"
-          className="absolute top-0 -left-[99999px] hidden"
+          className="absolute top-0 -left-[99999px]"
         >
           Create a new todo
         </label>
