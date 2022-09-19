@@ -41,7 +41,7 @@ const MovableTodoItem = ({
         />
         <label
           htmlFor={`todo-${item.id}`}
-          className="absolute top-0 -left-[9999999px]"
+          className="absolute top-0 -left-[9999999px] hidden"
         >
           Checkbox
         </label>
