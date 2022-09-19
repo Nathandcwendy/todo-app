@@ -9,10 +9,7 @@ const InputTodo = ({ newTodo, setNewTodo, handleAdd }) => {
           type="checkbox"
           className="appearance-none rounded-full h-6 w-6 lg:h-10 lg:w-10 border-2 dark:border-dm-VDGBlue dark:transparent"
         />
-        <label
-          htmlFor="input-todo"
-          className="absolute top-0 -left-[99999px] hidden"
-        >
+        <label htmlFor="input-todo" className="absolute top-0 -left-[99999px]">
           Checkbox
         </label>
       </div>
