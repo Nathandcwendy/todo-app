@@ -5,6 +5,7 @@ const InputTodo = ({ newTodo, setNewTodo, handleAdd }) => {
     <div className="flex flex-row justify-start items-center space-x-1 xs:space-x-3 md:space-x-4 lg:space-x-6 w-full px-2 py-2 lg:px-4 lg:py-3 bg-white dark:bg-dm-VDDesatBlue rounded-lg mb-8">
       <div className="w-auto relative grid place-content-center">
         <input
+          id="input-todo"
           type="checkbox"
           className="appearance-none rounded-full h-6 w-6 lg:h-10 lg:w-10 border-2 dark:border-dm-VDGBlue dark:transparent"
         />
@@ -28,7 +29,7 @@ const InputTodo = ({ newTodo, setNewTodo, handleAdd }) => {
           value={newTodo}
         />
         <label
-          htmlFor="input-to-text"
+          htmlFor="input-todo-text"
           className="absolute top-0 -left-[99999px]"
         >
           Create a new todo
