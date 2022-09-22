@@ -12,7 +12,11 @@ const MovableTodoItem = ({
   dragLeave,
 }) => {
   const checkBoxStyles =
-    "appearance-none border rounded-full h-6 w-6 lg:h-10 lg:w-10 hover:cursor-pointer dark:border-dm-VDGBlue dark:transparent";
+    "appearance-none relative z-10 border rounded-full h-6 w-6 lg:h-10 lg:w-10 hover:cursor-pointer dark:border-dm-VDGBlue dark:transparent";
+
+  const checkboxDiv =
+    "absolute bg-blue top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-transparent border-2 rounded-full h-6 w-6 lg:h-10 lg:w-10 hover:cursor-pointer dark:border-dm-VDGBlue dark:transparent z-10";
+
   const todoStyle =
     "flex-grow px-1 py-1.5 text-base xs:text-base md:text-lg lg:px-2 lg:py-2 lg:text-2xl hover:cursor-pointer dark:text-slate-300";
 
@@ -50,9 +54,15 @@ const MovableTodoItem = ({
         {item.checked ? (
           <HiCheck
             onClick={() => handleCheck(item.id)}
-            className="absolute top-1/2 left-1/2 stroke-2 stroke-white text-base xs:xl md:text-base lg:text-2xl transform -translate-x-1/2 -translate-y-1/2 hover:cursor-pointer"
+            className="absolute z-10 top-1/2 left-1/2 stroke-2 stroke-white text-base xs:xl md:text-base lg:text-2xl transform -translate-x-1/2 -translate-y-1/2 hover:cursor-pointer"
           />
         ) : null}
+        <div
+          onClick={() => handleCheck(item.id)}
+          className={
+            !item.checked ? `${checkboxDiv} checkbox-div` : `${checkboxDiv}`
+          }
+        ></div>
       </div>
       <p
         onDoubleClick={() => handleCheck(item.id)}

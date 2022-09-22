@@ -49,4 +49,10 @@
   .dragItem {
     @apply opacity-10;
   }
+
+  .checkbox-div:hover {
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
+        border-box;
+  }
 }
