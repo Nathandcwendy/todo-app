@@ -12,10 +12,10 @@ const MovableTodoItem = ({
   dragLeave,
 }) => {
   const checkBoxStyles =
-    "appearance-none relative z-10 border rounded-full h-6 w-6 lg:h-10 lg:w-10 hover:cursor-pointer dark:border-dm-VDGBlue dark:transparent";
+    "appearance-none relative z-10 border rounded-full h-6 w-6 lg:h-10 lg:w-10 hover:cursor-pointer dark:border-dm-VDGBlue";
 
   const checkboxDiv =
-    "absolute bg-blue top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-transparent border-2 rounded-full h-6 w-6 lg:h-10 lg:w-10 hover:cursor-pointer dark:border-dm-VDGBlue dark:transparent z-10";
+    "absolute bg-blue top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-transparent border-2 rounded-full h-6 w-6 lg:h-10 lg:w-10 hover:cursor-pointer z-10";
 
   const todoStyle =
     "flex-grow px-1 py-1.5 text-base xs:text-base md:text-lg lg:px-2 lg:py-2 lg:text-2xl hover:cursor-pointer dark:text-slate-300";

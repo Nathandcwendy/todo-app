@@ -55,4 +55,10 @@
       linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
         border-box;
   }
+
+  .dark .checkbox-div:hover {
+    background: linear-gradient(hsl(235 24% 19%), hsl(235 24% 19%)) padding-box,
+      linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
+        border-box;
+  }
 }
