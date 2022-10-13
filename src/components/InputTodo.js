@@ -27,6 +27,7 @@ const InputTodo = ({ newTodo, setNewTodo, handleAdd }) => {
           className="flex-grow px-1 py-1.5 text-base md:text-xl lg:px-2 lg:py-3 lg:text-2xl w-full dark:bg-transparent dark:text-slate-200 focus:outline-none"
           onChange={(e) => setNewTodo(e.target.value)}
           value={newTodo}
+          autoComplete="off"
         />
         <label
           htmlFor="input-todo-text"
